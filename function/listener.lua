@@ -71,9 +71,7 @@ end
 -- ============================================================
 -- 初始化（require 时自动执行）
 -- ============================================================
--- UART2 初始化已在 function.rs485_hardware 中完成，这里只需注册监听回调。
--- 但为了独立可用，这里也做一次兜底 setup（参数与 rs485_hardware 保持一致）。
-uart.setup(uartid, 9600, 8, 1, uart.NONE, uart.LSB, 1024, nil, 0, 20000)
+require "function.rs485_hardware"  -- UART2 的 uart.setup 由它完成
 uart.on(uartid, "receive", recv_cb)
 
 sys.taskInit(listener_task)
